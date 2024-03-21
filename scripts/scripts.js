@@ -1,3 +1,11 @@
+// TODO: Add a button to clear colors from the grid
+// TODO: Add functionality to user choosing number of squares
+// TODO: Add a button to toggle grid
+// TODO: Choose between color and black & white grid
+// TODO: check that num is a number
+// TODO: Make sure it's <= 100
+// TODO: Add a title and format the buttons
+
 import { Helpers } from './helpers.js';
 
 
@@ -10,7 +18,7 @@ const createSquare = (num) => {
 
 const styleSquare = (square, num) => {
     square.style.boxSizing = 'border-box';
-    square.style.border = 'solid 1px black';
+    square.style.border = 'solid 1px white';
     // flex basis based on the number of squares
     square.style.flex = `1 1 ${Helpers.percent(1, num)}%`;
     square.style.height = `${Helpers.percent(1, num)}%`;
@@ -56,4 +64,4 @@ const createGrid = (num) => {
     }
 }
 
-createGrid(64);
+createGrid(100);

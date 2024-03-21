@@ -1,8 +1,25 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#main {
+    display: flex;
+    flex-direction: column;
+}
+
+#controls {
+    height: 10vh;
+}
+
 #container {
-    box-sizing: border-box;
+    border: double 30px lightgray;
     display: flex;
     flex-wrap: wrap;
+    box-sizing: border-box;
     width: 960px;
-    height: 960px;
+    height: 90vh;
     margin: auto;
+    /* Make the container responsive */
+    flex: 1 1 auto;
 }
