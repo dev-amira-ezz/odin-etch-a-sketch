@@ -11,7 +11,7 @@ import { Helpers } from './helpers.js';
 
 const createSquare = (num) => {
     const container = document.querySelector('#container');
-    const square = Helpers.createNode('square', 'div', '', container);
+    const square = Helpers.createNode('square', 'div', '', container, 'class');
     styleSquare(square, num);
     return square;
 }
@@ -64,4 +64,9 @@ const createGrid = (num) => {
     }
 }
 
-createGrid(100);
+document.querySelector('#clear-grid').addEventListener('click', () => {
+    let squares = document.querySelectorAll('.square');
+    squares.forEach(square => squareBackground(1, square, 255, 255, 255))
+});
+
+createGrid(16);

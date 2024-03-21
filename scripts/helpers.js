@@ -15,12 +15,12 @@ const power = (num, power) => {
 
 // ======= DOM Manipulation Helpers =======
 // Create a Node
-const createNode = (nodeName, nodeType, content, parent) => {
+const createNode = (nodeName, nodeType, content, parent, attributeType) => {
     let node = document.querySelector(`#${nodeName}`);
     // Check if the node not already present
     if (node === null) {
         node = document.createElement(nodeType);
-        node.setAttribute('id', `#${nodeName}`);
+        node.setAttribute(attributeType, `${nodeName}`);
         node.textContent = content;
         parent.appendChild(node);
     }
