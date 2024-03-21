@@ -1,6 +1,4 @@
-// TODO: Add a button to clear colors from the grid
 // TODO: Add functionality to user choosing number of squares
-// TODO: Add a button to toggle grid
 // TODO: Choose between color and black & white grid
 // TODO: check that num is a number
 // TODO: Make sure it's <= 100
@@ -68,5 +66,15 @@ document.querySelector('#clear-grid').addEventListener('click', () => {
     let squares = document.querySelectorAll('.square');
     squares.forEach(square => squareBackground(1, square, 255, 255, 255))
 });
+
+document.querySelector('#toggle-grid').addEventListener('click', () => {
+    let squares = document.querySelectorAll('.square');
+    squares.forEach(square => {
+        square.style.borderColor = square.style.borderColor == 'white'
+            ? 'black'
+            : 'white';
+    });
+});
+
 
 createGrid(16);
