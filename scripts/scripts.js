@@ -95,12 +95,12 @@ const createGrid = (num) => {
 // New grid with number of squares specified by user
 const newGrid = () => {
     let num = prompt('Select a number less than or equals 100');
-        if (num != null && !isNaN(num) && num <= 100 && num > 0) {
-            Helpers.clearNode(container);
-            createGrid(num);
-        } else {
-            alert(`You didn't select a number between 1 and 100`);
-        }
+    if (num != null && !isNaN(num) && num <= 100 && num > 0) {
+        Helpers.clearNode(container);
+        createGrid(num);
+    } else {
+        alert(`You didn't select a number between 1 and 100`);
+    }
 }
 
 // Event listener to the New Grid button
@@ -110,7 +110,11 @@ document.querySelector('#new-grid').addEventListener('click', newGrid);
 // === Clear Grid Colors ===
 // A function to clear grid
 const clearGrid = (square) => {
-    squareBackground(1, square, 255, 255, 255);
+    squareBackground(0.1, square, 255, 255, 255);
+    darkenSquare(square
+        , Helpers.random(255)
+        , Helpers.random(255)
+        , Helpers.random(255));
 }
 
 // An event listener to the button used to clear the grid colors
