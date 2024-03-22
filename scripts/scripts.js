@@ -79,26 +79,35 @@ document.querySelector('#color-pen').addEventListener(
 );
 
 
-// === Create a new grid ===
-// New grid function
-const newGrid = () => {
-    let num = prompt('Select a number less than or equals 100');
-    Helpers.clearNode(container);
-    if (num != null) {
-        while (isNaN(num) || num > 100) {
-            num = prompt('Select a number less than or equals 100');
-        }
-    } else {
-        createGrid(16);
+// === Create a grid ===
+const createGrid = (num) => {
+    for (let i = 0; i < Helpers.power(num, 2); i++) {
+        let square = createSquare(num);
+        squareHover(square);
+        darkenSquare(
+            square,
+            Helpers.random(255)
+            , Helpers.random(255)
+            , Helpers.random(255));
     }
-    createGrid(num);
 }
 
-// Create a new grid with number of squares specified by user
+// New grid with number of squares specified by user
+const newGrid = () => {
+    let num = prompt('Select a number less than or equals 100');
+        if (num != null && !isNaN(num) && num <= 100 && num > 0) {
+            Helpers.clearNode(container);
+            createGrid(num);
+        } else {
+            alert(`You didn't select a number between 1 and 100`);
+        }
+}
+
+// Event listener to the New Grid button
 document.querySelector('#new-grid').addEventListener('click', newGrid);
 
 
-// === Clear Grid ===
+// === Clear Grid Colors ===
 // A function to clear grid
 const clearGrid = (square) => {
     squareBackground(1, square, 255, 255, 255);
@@ -121,14 +130,5 @@ document.querySelector('#toggle-grid').addEventListener(
     'click', () => handleSquares(toggleGridlines)
 );
 
-// ======= Create and call the Default Grid =======
-const createGrid = (num) => {
-    for (let i = 0; i < Helpers.power(num, 2); i++) {
-        let square = createSquare(num);
-        squareHover(square);
-        darkenSquare(square, Helpers.random(255), Helpers.random(255), Helpers.random(255));
-    }
-}
-
-// Call the function to create a default grid 
+// Create a default grid 
 createGrid(16);
