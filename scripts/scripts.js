@@ -1,6 +1,3 @@
-// TODO: Add a title and format the buttons
-// Clean up code
-
 import { Helpers } from './helpers.js';
 
 // Create one square
