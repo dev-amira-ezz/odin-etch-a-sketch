@@ -2,7 +2,7 @@ import { Helpers } from './helpers.js';
 
 let container = document.querySelector('#container');
 
-// ======= Square Creation and Styling =======
+// ======= Square Creation, Handling and Styling =======
 // Create one square
 const createSquare = (num) => {
     const square = Helpers.createNode('square', 'div', '', container, 'class');
@@ -51,29 +51,36 @@ const darkenSquare = (square, red, green, blue) => {
     });
 }
 
-// ======= Button Event listeners and related functions =======
-// === Choose Pen Color ===
-const blackPen = () => {
+// Select all squares and apply functions
+const handleSquares = (callBack) => {
     let squares = document.querySelectorAll('.square');
-    squares.forEach(square => {
-        squareBackground(1, square, 255, 255, 255);
-        darkenSquare(square, 0, 0, 0);
-    });
+    squares.forEach(square => callBack(square));
 }
 
-const colorPen = () => {
-    let squares = document.querySelectorAll('.square');
-    squares.forEach(square => {
-        squareBackground(1, square, 255, 255, 255);
-        darkenSquare(square, Helpers.random(255), Helpers.random(255), Helpers.random(255));
-    });
+// ======= Button Event listeners and related functions =======
+// === Choose Pen Color ===
+const blackPen = (square) => {
+    squareBackground(1, square, 255, 255, 255);
+    darkenSquare(square, 0, 0, 0);
+}
+
+const colorPen = (square) => {
+    squareBackground(1, square, 255, 255, 255);
+    darkenSquare(square
+        , Helpers.random(255)
+        , Helpers.random(255)
+        , Helpers.random(255));
 }
 
 // Use black pen
-document.querySelector('#black-pen').addEventListener('click', blackPen);
+document.querySelector('#black-pen').addEventListener(
+    'click', () => handleSquares(blackPen)
+);
 
 // Use color pen
-document.querySelector('#color-pen').addEventListener('click', colorPen);
+document.querySelector('#color-pen').addEventListener(
+    'click', () => handleSquares(colorPen)
+);
 
 
 // === Create a new grid ===
@@ -97,27 +104,27 @@ document.querySelector('#new-grid').addEventListener('click', newGrid);
 
 // === Clear Grid ===
 // A function to clear grid
-const clearGrid = () => {
-    let squares = document.querySelectorAll('.square');
-    squares.forEach(square => squareBackground(1, square, 255, 255, 255));
+const clearGrid = (square) => {
+    squareBackground(1, square, 255, 255, 255);
 }
 
 // An event listener to the button used to clear the grid colors
-document.querySelector('#clear-grid').addEventListener('click', clearGrid);
+document.querySelector('#clear-grid').addEventListener(
+    'click', () => handleSquares(clearGrid)
+);
 
 
 // === Toggle Gridlines ===
-const toggleGridlines = () => {
-    let squares = document.querySelectorAll('.square');
-    squares.forEach(square => {
-        square.style.borderColor = square.style.borderColor == 'white'
-            ? 'black'
-            : 'white';
-    });
+const toggleGridlines = (square) => {
+    square.style.borderColor = square.style.borderColor == 'white'
+        ? '#555'
+        : 'white';
 }
 
 // An event listener to the button that shows/hides gridlines
-document.querySelector('#toggle-grid').addEventListener('click', toggleGridlines);
+document.querySelector('#toggle-grid').addEventListener(
+    'click', () => handleSquares(toggleGridlines)
+);
 
 // ======= Create and call the Default Grid =======
 const createGrid = (num) => {
