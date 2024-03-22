@@ -1,8 +1,5 @@
-// TODO: Add functionality to user choosing number of squares
-// TODO: Choose between color and black & white grid
-// TODO: check that num is a number
-// TODO: Make sure it's <= 100
 // TODO: Add a title and format the buttons
+// Clean up code
 
 import { Helpers } from './helpers.js';
 
@@ -34,19 +31,37 @@ const squareBackground = (squareOpacity, square, red, green, blue) => {
 }
 
 // square darkens by 10% after each hover
-const darkenSquare = (square) => {
+const darkenSquare = (square, red, green, blue) => {
     let squareOpacity = 0.1;
     square.addEventListener('mouseout', () => {
         if (squareOpacity < 1) {
             squareOpacity += 0.1;
         }
-        squareBackground(squareOpacity
+        return squareBackground(squareOpacity
             , square
-            , Helpers.random(255)
-            , Helpers.random(255)
-            , Helpers.random(255));
+            , red
+            , green
+            , blue);
     });
 }
+
+// Use black pen
+document.querySelector('#black-pen').addEventListener('click', () => {
+    let squares = document.querySelectorAll('.square');
+    squares.forEach(square => {
+        squareBackground(1, square, 255, 255, 255);
+        darkenSquare(square, 0, 0, 0);
+    });
+});
+
+// Use color pen
+document.querySelector('#color-pen').addEventListener('click', () => {
+    let squares = document.querySelectorAll('.square');
+    squares.forEach(square => {
+        squareBackground(1, square, 255, 255, 255);
+        darkenSquare(square, Helpers.random(255), Helpers.random(255), Helpers.random(255));
+    });
+});
 
 // square change color on hover
 const squareHover = (square) => {
@@ -60,14 +75,14 @@ const createGrid = (num) => {
     for (let i = 0; i < Helpers.power(num, 2); i++) {
         let square = createSquare(num);
         squareHover(square);
-        darkenSquare(square);
+        darkenSquare(square, Helpers.random(255), Helpers.random(255), Helpers.random(255));
     }
 }
 
 // An event listener to the button used to clear the grid colors
 document.querySelector('#clear-grid').addEventListener('click', () => {
     let squares = document.querySelectorAll('.square');
-    squares.forEach(square => squareBackground(1, square, 255, 255, 255))
+    squares.forEach(square => squareBackground(1, square, 255, 255, 255));
 });
 
 // An event listener to the button that shows/hides gridlines
@@ -86,11 +101,11 @@ document.querySelector('#new-grid').addEventListener('click', () => {
     let num = prompt('Select a number less than or equals 100');
     if (num != null) {
         while (isNaN(num) || num > 100) {
-            num = prompt ('Select a number less than or equals 100');
+            num = prompt('Select a number less than or equals 100');
         }
-    } 
-        Helpers.clearNode(container);
-        createGrid(num);
+    }
+    Helpers.clearNode(container);
+    createGrid(num);
 });
 
 // Call the function to create a default grid 
