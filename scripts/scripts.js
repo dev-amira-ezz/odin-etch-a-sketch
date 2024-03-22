@@ -56,16 +56,18 @@ const handleSquares = (callBack) => {
 // ======= Button Event listeners and related functions =======
 // === Choose Pen Color ===
 const blackPen = (square) => {
-    squareBackground(1, square, 255, 255, 255);
     darkenSquare(square, 0, 0, 0);
 }
 
 const colorPen = (square) => {
-    squareBackground(1, square, 255, 255, 255);
     darkenSquare(square
         , Helpers.random(255)
         , Helpers.random(255)
         , Helpers.random(255));
+}
+
+const eraser = (square) => {
+    darkenSquare(square, 255, 255, 255);
 }
 
 // Use black pen
@@ -78,6 +80,10 @@ document.querySelector('#color-pen').addEventListener(
     'click', () => handleSquares(colorPen)
 );
 
+// User eraser
+document.querySelector('#eraser').addEventListener(
+    'click', () => handleSquares(eraser)
+);
 
 // === Create a grid ===
 const createGrid = (num) => {
