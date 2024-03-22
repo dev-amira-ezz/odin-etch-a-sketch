@@ -47,3 +47,8 @@ h1 {
     /* Make the container responsive */
     flex: 1 1 auto;
 }
+
+.square {
+    box-sizing: border-box;
+    border: solid 1px #555;
+}

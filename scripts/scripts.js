@@ -6,27 +6,23 @@ let container = document.querySelector('#container');
 // Create one square
 const createSquare = (num) => {
     const square = Helpers.createNode('square', 'div', '', container, 'class');
+    square.classList.add('square');
     styleSquare(square, num);
     return square;
 }
 
 // Apply style to one square
 const styleSquare = (square, num) => {
-    square.style.boxSizing = 'border-box';
-    square.style.border = 'solid 1px white';
-    // flex basis based on the number of squares
-    square.style.flex = `1 1 ${Helpers.percent(1, num)}%`;
-    square.style.height = `${Helpers.percent(1, num)}%`;
+    // flex basis & height based on the number of squares
+    square.style.setProperty('flex', `1 1 ${Helpers.percent(1, num)}%`);
+    square.style.setProperty('height', `${Helpers.percent(1, num)}%`);
 }
 
 
 // Choose square background color & opacity
 const squareBackground = (squareOpacity, square, red, green, blue) => {
-
-    square.style.backgroundColor = `rgba(${red}
-                                       , ${green}
-                                       , ${blue}
-                                       , ${squareOpacity})`;
+    square.style.setProperty('background-color'
+        , `rgba(${red}, ${green}, ${blue}, ${squareOpacity})`);
 }
 
 // square change color on hover
@@ -116,9 +112,8 @@ document.querySelector('#clear-grid').addEventListener(
 
 // === Toggle Gridlines ===
 const toggleGridlines = (square) => {
-    square.style.borderColor = square.style.borderColor == 'white'
-        ? '#555'
-        : 'white';
+    square.style.setProperty('border-color'
+        , square.style.borderColor == 'white' ? '#555' : 'white');
 }
 
 // An event listener to the button that shows/hides gridlines
